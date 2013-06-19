@@ -53,7 +53,7 @@ public final class GFactory {
     /**
      * Convert java.awt.Color in hex string code (RRGGBB)
      *
-     * @param color, the color to be converted
+     * @param color the color to be converted
      * @return a string with color hex code
      */
     public static String color2hex(@Nonnull final Color color) {

@@ -73,7 +73,7 @@ public class GTc extends Tc {
     /**
      * Set table cell grid span
      *
-     * @param lSpan, grid span value
+     * @param lSpan grid span value
      * @return the same GTc instance
      */
     @Nonnull
