@@ -76,7 +76,7 @@ public final class GFactory {
     public static CTBorder buildBorder(final long lSize, @Nonnull final STBorder eBorderLine,
         @CheckForNull final String sColor) {
 
-        Validate.isTrue(0L < lSize, "Size value not valid");
+        Validate.isTrue(0L <= lSize, "Size value not valid");
         Validate.notNull(eBorderLine, "Border Line not valid");
 
         final CTBorder ctBorder = FACTORY.createCTBorder();
