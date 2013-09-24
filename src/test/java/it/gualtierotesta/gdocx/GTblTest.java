@@ -21,8 +21,9 @@ package it.gualtierotesta.gdocx;
 import org.docx4j.wml.JcEnumeration;
 import org.docx4j.wml.STBorder;
 import org.docx4j.wml.STTblLayoutType;
-import org.fest.assertions.Assertions;
 import org.junit.Test;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Test unit for class GTbl
@@ -35,7 +36,7 @@ public class GTblTest {
 
     @Test
     public void testCreate() {
-        Assertions.assertThat(GTbl.create()).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(GTbl.create()).isNotNull().isInstanceOf(GTbl.class);
     }
 
     @Test
@@ -44,8 +45,8 @@ public class GTblTest {
         final String exp2 = String.format("<w:t>%s</w:t>", HELLO_WORLD);
         final GTbl iut = GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))));
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -55,19 +56,43 @@ public class GTblTest {
         final GTbl iut = GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
             .align(JcEnumeration.RIGHT);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
-    public void testWidth() {
+    public void width_Dxa() {
         final String exp1 = "<w:tbl";
         final String exp2 = "<w:tblW w:w=\"250\" w:type=\"dxa\"/>";
         final GTbl iut =
             GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD)))).width(250L, "dxa");
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+    }
+
+    @Test
+    public void width_Pct() {
+        final String exp1 = "<w:tbl";
+        final String exp2 = "<w:tblW w:w=\"2500\" w:type=\"pct\"/>";
+        final GTbl iut =
+            GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
+                .width(2500, "pct");
+
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+    }
+
+    @Test
+    public void widthAuto() {
+        final String exp1 = "<w:tbl";
+        final String exp2 = "<w:tblW w:w=\"0\" w:type=\"auto\"/>";
+        final GTbl iut =
+            GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
+                .widthAuto();
+
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -77,8 +102,8 @@ public class GTblTest {
         final GTbl iut = GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
             .layout(STTblLayoutType.FIXED);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -88,8 +113,8 @@ public class GTblTest {
         final GTbl iut = GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
             .look("01E0");
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -99,8 +124,8 @@ public class GTblTest {
         final GTbl iut = GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
             .grid(100L, 200L, 300L);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -108,31 +133,31 @@ public class GTblTest {
         final String exp1 = "<w:tblBorders>";
         final String exp2 = "<w:top w:val=\"double\" w:color=\"F0E000\" w:sz=\"3\"/>";
         final GTbl iut = GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
-            .borderTop(3L, STBorder.DOUBLE,"F0E000");
+            .borderTop(3L, STBorder.DOUBLE,"F0E000", null);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
     public void testBorderBottom() {
         final String exp1 = "<w:tblBorders>";
-        final String exp2 = "<w:bottom w:val=\"zigZag\" w:color=\"001122\" w:sz=\"10\"/>";
+        final String exp2 = "<w:bottom w:val=\"zigZag\" w:color=\"001122\" w:sz=\"10\" w:space=\"30\"/>";
         final GTbl iut = GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
-            .borderBottom(10L, STBorder.ZIG_ZAG,"001122");
+            .borderBottom(10L, STBorder.ZIG_ZAG,"001122", 30L);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
     public void testBorders() {
         final String exp1 = "<w:tblBorders>";
-        final String exp2 = "<w:insideH w:val=\"apples\" w:color=\"334455\" w:sz=\"3\"/>";
+        final String exp2 = "<w:insideH w:val=\"apples\" w:color=\"334455\" w:sz=\"3\" w:space=\"0\"/>";
         final GTbl iut = GTbl.create().add(GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))))
-            .borders(3L, STBorder.APPLES,"334455");
+            .borders(3L, STBorder.APPLES,"334455", 0L);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTbl.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 }
