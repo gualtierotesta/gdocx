@@ -64,26 +64,30 @@ public final class GFactory {
         return rgb.substring(2, rgb.length());
     }
 
-
     /**
      * Build a CT border
      *
-     * @param lSize       size of the border
+     * @param lSize       width of the border in eighths of a point (min 2, max 96)
      * @param eBorderLine type of the border line (enum)
-     * @param sColor      color of the border line. can be null if no border line
+     * @param sColor      color of the border line in RRGGBB format (es. FFFF00). It can be null if no border line
+     * @param lSpace      Specifies the spacing offset. Values are specified in points (1/72nd of an inch). it can be
+     *                    null
      * @return same GTc instance
      */
     public static CTBorder buildBorder(final long lSize, @Nonnull final STBorder eBorderLine,
-        @CheckForNull final String sColor) {
+        @CheckForNull final String sColor, @CheckForNull final Long lSpace) {
 
-        Validate.isTrue(0L <= lSize, "Size value not valid");
+        Validate.isTrue(2L <= lSize && lSize <= 96, "Size value not valid");
         Validate.notNull(eBorderLine, "Border Line not valid");
 
         final CTBorder ctBorder = FACTORY.createCTBorder();
         ctBorder.setVal(eBorderLine);
-        if (STBorder.NIL != eBorderLine) {
-            if (null != sColor && !sColor.isEmpty()) {
+        if (STBorder.NIL != eBorderLine && STBorder.NONE != eBorderLine) {
+            if (null != sColor) {
                 ctBorder.setColor(sColor);
+            }
+            if (null != lSpace) {
+                ctBorder.setSpace(BigInteger.valueOf(lSpace));
             }
             ctBorder.setSz(BigInteger.valueOf(lSize));
         }
