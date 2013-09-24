@@ -54,7 +54,6 @@ public class GTc extends Tc {
         return new GTc();
     }
 
-
     /**
      * Add an object to the table cell
      *
@@ -153,8 +152,9 @@ public class GTc extends Tc {
      * @param sColor      color of the border line. can be null if no border line
      * @return same GTc instance
      */
-    public GTc borderTop(final long lSize, @Nonnull final STBorder eBorderLine, @CheckForNull final String sColor) {
-        getTcBorders().setTop(GFactory.buildBorder(lSize, eBorderLine, sColor));
+    public GTc borderTop(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
+        final Long lSpace) {
+        getTcBorders().setTop(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
 
@@ -166,8 +166,9 @@ public class GTc extends Tc {
      * @param sColor      color of the border line. can be null if no border line
      * @return same GTc instance
      */
-    public GTc borderBottom(final long lSize, @Nonnull final STBorder eBorderLine, @CheckForNull final String sColor) {
-        getTcBorders().setBottom(GFactory.buildBorder(lSize, eBorderLine, sColor));
+    public GTc borderBottom(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
+        final Long lSpace) {
+        getTcBorders().setBottom(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
 
@@ -179,8 +180,9 @@ public class GTc extends Tc {
      * @param sColor      color of the border line. can be null if no border line
      * @return same GTc instance
      */
-    public GTc borderLeft(final long lSize, @Nonnull final STBorder eBorderLine, @CheckForNull final String sColor) {
-        getTcBorders().setLeft(GFactory.buildBorder(lSize, eBorderLine, sColor));
+    public GTc borderLeft(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
+        final Long lSpace) {
+        getTcBorders().setLeft(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
 
@@ -192,8 +194,9 @@ public class GTc extends Tc {
      * @param sColor      color of the border line. can be null if no border line
      * @return same GTc instance
      */
-    public GTc borderRight(final long lSize, @Nonnull final STBorder eBorderLine, @CheckForNull final String sColor) {
-        getTcBorders().setRight(GFactory.buildBorder(lSize, eBorderLine, sColor));
+    public GTc borderRight(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
+        final Long lSpace) {
+        getTcBorders().setRight(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
 
