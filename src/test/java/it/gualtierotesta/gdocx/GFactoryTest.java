@@ -20,26 +20,48 @@ package it.gualtierotesta.gdocx;
 
 import org.docx4j.wml.CTBorder;
 import org.docx4j.wml.STBorder;
-import org.fest.assertions.Assertions;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.awt.*;
+import java.math.BigInteger;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 public class GFactoryTest {
 
+    private static final String COLOR = "FF0066";
+
     @Test
-    public void testColor2Hex() {
-        Assert.assertEquals("ffffff", GFactory.color2hex(Color.WHITE));
-        Assert.assertEquals("000000", GFactory.color2hex(Color.BLACK));
-        Assert.assertEquals("ff0000", GFactory.color2hex(Color.RED));
+    public void convertAwtColorToHex() {
+        assertThat(GFactory.color2hex(Color.WHITE)).isEqualTo("ffffff");
+        assertThat(GFactory.color2hex(Color.BLACK)).isEqualTo("000000");
+        assertThat(GFactory.color2hex(Color.RED)).isEqualTo("ff0000");
     }
 
     @Test
-    public void testBuildBorder() {
-        final CTBorder iut = GFactory.buildBorder(4L, STBorder.SINGLE, "auto");
+    public void singleLineBorder() {
+        // given
+        final STBorder borderLine = STBorder.SINGLE;
+        Long space = Long.valueOf(12);
+        // when
+        final CTBorder iut = GFactory.buildBorder(4L, borderLine, COLOR, space);
+        // then
+        assertThat(iut).isNotNull().isInstanceOf(CTBorder.class);
+        assertThat(iut.getVal()).isEqualTo(borderLine);
+        assertThat(iut.getColor()).isEqualTo(COLOR);
+        assertThat(iut.getSpace()).isEqualTo(BigInteger.valueOf(space));
+    }
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(CTBorder.class);
-        Assertions.assertThat(iut.getVal()).isEqualTo(STBorder.SINGLE);
+    @Test
+    public void noLineBorder() {
+        // given
+        final STBorder borderLine = STBorder.NIL;
+        // when
+        final CTBorder iut = GFactory.buildBorder(12L, borderLine, COLOR, null);
+        // then
+        assertThat(iut).isNotNull().isInstanceOf(CTBorder.class);
+        assertThat(iut.getVal()).isEqualTo(borderLine);
+        assertThat(iut.getColor()).isNull();
+        assertThat(iut.getSz()).isNull();
     }
 }
