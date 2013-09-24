@@ -20,8 +20,9 @@ package it.gualtierotesta.gdocx;
 
 import org.docx4j.wml.STBorder;
 import org.docx4j.wml.STVerticalJc;
-import org.fest.assertions.Assertions;
 import org.junit.Test;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Test unit for class GTc
@@ -34,7 +35,7 @@ public class GTcTest {
 
     @Test
     public void testCreate() {
-        Assertions.assertThat(GTc.create()).isNotNull().isInstanceOf(GTc.class);
+        assertThat(GTc.create()).isNotNull().isInstanceOf(GTc.class);
     }
 
     @Test
@@ -43,8 +44,8 @@ public class GTcTest {
         final String exp2 = String.format("<w:t>%s</w:t>", HELLO_WORLD);
         final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD));
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -54,8 +55,8 @@ public class GTcTest {
         final String exp2 = String.format("<w:gridSpan w:val=\"%d\"/>", span);
         final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).gridspan(span);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -64,8 +65,8 @@ public class GTcTest {
         final String exp2 = " <w:shd";
         final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).shd("auto", "E6E6E6");
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -74,8 +75,8 @@ public class GTcTest {
         final String exp2 = "<w:vAlign w:val=\"center\"/>";
         final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).valign(STVerticalJc.CENTER);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -84,8 +85,8 @@ public class GTcTest {
         final String exp2 = "<w:vMerge w:val=\"RESTART\"/>";
         final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).vmerge("RESTART");
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -94,8 +95,8 @@ public class GTcTest {
         final String exp2 = "<w:vMerge/>";
         final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).vmerge(null);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -104,48 +105,48 @@ public class GTcTest {
         final String exp2 = "<w:tcW w:w=\"300\" w:type=\"dxa\"/>";
         final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).width(300L, "dxa");
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
     public void testBorderTop() {
         final String exp1 = "<w:tcBorders>";
         final String exp2 = " <w:top w:val=\"single\" w:color=\"auto\" w:sz=\"4\"/>";
-        final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).borderTop(4L, STBorder.SINGLE, "auto");
+        final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).borderTop(4L, STBorder.SINGLE, "auto", null);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
     public void testBorderBottom() {
         final String exp1 = "<w:tcBorders>";
-        final String exp2 = " <w:bottom w:val=\"single\" w:color=\"auto\" w:sz=\"4\"/>";
-        final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).borderBottom(4L, STBorder.SINGLE, "auto");
+        final String exp2 = " <w:bottom w:val=\"single\" w:color=\"auto\" w:sz=\"4\" w:space=\"25\"/>";
+        final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).borderBottom(4L, STBorder.SINGLE, "auto", 25L);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
     public void testBorderLeft() {
         final String exp1 = "<w:tcBorders>";
-        final String exp2 = " <w:left w:val=\"single\" w:color=\"auto\" w:sz=\"4\"/>";
-        final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).borderLeft(4L, STBorder.SINGLE, "auto");
+        final String exp2 = " <w:left w:val=\"single\" w:color=\"auto\" w:sz=\"4\" w:space=\"100\"/>";
+        final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).borderLeft(4L, STBorder.SINGLE, "auto", 100L);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
     public void testBorderRight() {
         final String exp1 = "<w:tcBorders>";
-        final String exp2 = " <w:right w:val=\"single\" w:color=\"auto\" w:sz=\"4\"/>";
-        final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).borderRight(4L, STBorder.SINGLE, "auto");
+        final String exp2 = " <w:right w:val=\"single\" w:color=\"auto\" w:sz=\"4\" w:space=\"0\"/>";
+        final GTc iut = GTc.create().add(GP.create().text(HELLO_WORLD)).borderRight(4L, STBorder.SINGLE, "auto", 0L);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTc.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTc.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
 }
