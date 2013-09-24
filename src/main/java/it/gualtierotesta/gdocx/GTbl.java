@@ -86,16 +86,17 @@ public class GTbl extends Tbl {
     }
 
     /**
-     * Set table width
+     * Set the preferred width of the table
      *
-     * @param lWidth width value (> 0)
-     * @param sType  type (unit) of the value (for ex. "dxa")
+     * @param lWidth the value of the preferred width of the table. If omitted, the value is assumed to be zero.
+     * @param sType  type (unit) of the value
+     *               Possible values are: auto, dxa, nil, pict
      * @return same GTbl instance
      */
     @Nonnull
     public GTbl width(final long lWidth, @Nonnull final String sType) {
 
-        Validate.isTrue(0L < lWidth, "Width value not valid");
+        Validate.isTrue(0L <= lWidth, "Width value not valid");
         Validate.notEmpty(sType, "Type not valid");
 
         final TblWidth tblWidth = FACTORY.createTblWidth();
@@ -103,6 +104,16 @@ public class GTbl extends Tbl {
         tblWidth.setW(BigInteger.valueOf(lWidth));
         tblPr.setTblW(tblWidth);
         return this;
+    }
+
+    /**
+     * Set the preferred width of the table to auto
+     *
+     * @return same GTbl instance
+     */
+    @Nonnull
+    public GTbl widthAuto() {
+        return width(0L, "auto");
     }
 
     /**
@@ -169,8 +180,9 @@ public class GTbl extends Tbl {
      * @param sColor      color of the border line. can be null if no border line
      * @return same GTbl instance
      */
-    public GTbl borderTop(final long lSize, @Nonnull final STBorder eBorderLine, @Nonnull final String sColor) {
-        getTblBorders().setTop(GFactory.buildBorder(lSize, eBorderLine, sColor));
+    public GTbl borderTop(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
+        final Long lSpace) {
+        getTblBorders().setTop(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
 
@@ -182,8 +194,9 @@ public class GTbl extends Tbl {
      * @param sColor      color of the border line. can be null if no border line
      * @return same GTbl instance
      */
-    public GTbl borderBottom(final long lSize, @Nonnull final STBorder eBorderLine, @Nonnull final String sColor) {
-        getTblBorders().setBottom(GFactory.buildBorder(lSize, eBorderLine, sColor));
+    public GTbl borderBottom(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
+        final Long lSpace) {
+        getTblBorders().setBottom(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
 
@@ -195,8 +208,8 @@ public class GTbl extends Tbl {
      * @param sColor      color of the border line. can be null if no border line
      * @return same GTbl instance
      */
-    public GTbl borders(final long lSize, @Nonnull final STBorder eBorderLine, @Nonnull final String sColor) {
-        final CTBorder ctBorder = GFactory.buildBorder(lSize, eBorderLine, sColor);
+    public GTbl borders(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor, final Long lSpace) {
+        final CTBorder ctBorder = GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace);
         getTblBorders().setTop(ctBorder);
         getTblBorders().setBottom(ctBorder);
         getTblBorders().setInsideH(ctBorder);
