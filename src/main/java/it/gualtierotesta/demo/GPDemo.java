@@ -37,20 +37,31 @@ public class GPDemo {
 
     public static void main(final String[] args) throws Exception {
 
+        // Create new document
         final WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.createPackage();
         final MainDocumentPart mdp = wordMLPackage.getMainDocumentPart();
 
-        final GP para1 = GP.create().text("No formatting");
-        mdp.getJaxbElement().getBody().getContent().add(para1);
+        // Create document contents
+        createFirstParagraph(mdp);
+        createSecondParagraph(mdp);
+        createThirdParagraph(mdp);
+        createFourthParagraph(mdp);
 
-        final GP para2 = GP.create().text("Tahoma 24 red right aligned").font("Tahoma", 24).color("FF0000")
-            .align(JcEnumeration.RIGHT);
-        mdp.getJaxbElement().getBody().getContent().add(para2);
+        // Dump document XML on console
+        System.out.println(XmlUtils.marshaltoString(mdp.getJaxbElement(), true, true));
 
-        final GP para3 = GP.create().text("Verdana 16 bold blue center aligned").font("Verdana", 16).bold()
-            .color(GFactory.color2hex(Color.blue)).align(JcEnumeration.CENTER);
-        mdp.getJaxbElement().getBody().getContent().add(para3);
+        // Save document on temporary file
+        final String filename = createNameForTemporaryFile();
+        wordMLPackage.save(new File(filename));
+        System.out.printf("Saved %s%n", filename);
 
+    }
+
+    private static String createNameForTemporaryFile() {
+        return String.format("%s/out_GPDemo.docx", System.getProperty("java.io.tmpdir"));
+    }
+
+    private static void createFourthParagraph(final MainDocumentPart pMdp) {
         final GP para4 = GP.create().text("Verdana 6 Italic justified",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec dolor non erat lacinia porta. " +
                 "Vestibulum condimentum eleifend euismod. In viverra lacus ut justo posuere ullamcorper vitae id ipsum. " +
@@ -61,18 +72,24 @@ public class GPDemo {
                 "Etiam fermentum faucibus dolor sed viverra. Etiam sed suscipit metus. Nullam iaculis quis turpis " +
                 "et congue. Nulla egestas, odio sed aliquet placerat, risus enim euismod nisi, ut elementum dui " +
                 "lacus a eros. Curabitur rutrum justo quis arcu tempor, eget faucibus sapien facilisis. ")
-            .font("Verdana", 6)
-            .italic()
-            .align(JcEnumeration.BOTH);
-        mdp.getJaxbElement().getBody().getContent().add(para4);
+            .font("Verdana", 6L).italic().align(JcEnumeration.BOTH);
+        pMdp.getJaxbElement().getBody().getContent().add(para4);
+    }
 
+    private static void createThirdParagraph(final MainDocumentPart pMdp) {
+        final GP para3 = GP.create().text("Verdana 16 bold blue center aligned").font("Verdana", 16L).bold()
+            .color(GFactory.color2hex(Color.blue)).align(JcEnumeration.CENTER);
+        pMdp.getJaxbElement().getBody().getContent().add(para3);
+    }
 
-        System.out.println(XmlUtils.marshaltoString(mdp.getJaxbElement(), true, true));
+    private static void createSecondParagraph(final MainDocumentPart pMdp) {
+        final GP para2 = GP.create().text("Tahoma 24 red right aligned").font("Tahoma", 24L).color("FF0000")
+            .align(JcEnumeration.RIGHT);
+        pMdp.getJaxbElement().getBody().getContent().add(para2);
+    }
 
-        // Optionally save it
-        final String filename = String.format("%s/out_GPDemo.docx", System.getProperty("java.io.tmpdir"));
-        wordMLPackage.save(new File(filename));
-        System.out.printf("Saved %s%n", filename);
-
+    private static void createFirstParagraph(final MainDocumentPart pMdp) {
+        final GP para1 = GP.create().text("No formatting");
+        pMdp.getJaxbElement().getBody().getContent().add(para1);
     }
 }
