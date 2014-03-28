@@ -58,33 +58,34 @@ public class GPDemo {
     }
 
     private static String createNameForTemporaryFile() {
-        return String.format("%s/out_GPDemo.docx", System.getProperty("java.io.tmpdir"));
+        return String.format("%s/gdocx_GPDemo.docx", System.getProperty("java.io.tmpdir"));
     }
 
     private static void createFourthParagraph(final MainDocumentPart pMdp) {
         final GP para4 = GP.create().text("Verdana 6 Italic justified",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec dolor non erat lacinia porta. " +
-                "Vestibulum condimentum eleifend euismod. In viverra lacus ut justo posuere ullamcorper vitae id ipsum. " +
-                "Sed vestibulum sagittis ipsum, in rhoncus justo imperdiet et. Donec sed elementum elit. Proin id " +
-                "tortor sed ipsum vehicula lacinia. Vivamus vulputate nisi at magna lobortis, quis vulputate purus " +
-                "egestas. Integer dapibus lacus ultricies, semper elit mollis, tincidunt nisi. Vestibulum consectetur " +
-                "ipsum pharetra ipsum scelerisque facilisis. Proin blandit massa nec tortor rutrum imperdiet. " +
-                "Etiam fermentum faucibus dolor sed viverra. Etiam sed suscipit metus. Nullam iaculis quis turpis " +
-                "et congue. Nulla egestas, odio sed aliquet placerat, risus enim euismod nisi, ut elementum dui " +
-                "lacus a eros. Curabitur rutrum justo quis arcu tempor, eget faucibus sapien facilisis. ")
-            .font("Verdana", 6L).italic().align(JcEnumeration.BOTH);
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec dolor non erat lacinia porta. " +
+                        "Vestibulum condimentum eleifend euismod. In viverra lacus ut justo posuere ullamcorper vitae id ipsum. " +
+                        "Sed vestibulum sagittis ipsum, in rhoncus justo imperdiet et. Donec sed elementum elit. Proin id " +
+                        "tortor sed ipsum vehicula lacinia. Vivamus vulputate nisi at magna lobortis, quis vulputate purus " +
+                        "egestas. Integer dapibus lacus ultricies, semper elit mollis, tincidunt nisi. Vestibulum consectetur " +
+                        "ipsum pharetra ipsum scelerisque facilisis. Proin blandit massa nec tortor rutrum imperdiet. " +
+                        "Etiam fermentum faucibus dolor sed viverra. Etiam sed suscipit metus. Nullam iaculis quis turpis " +
+                        "et congue. Nulla egestas, odio sed aliquet placerat, risus enim euismod nisi, ut elementum dui " +
+                        "lacus a eros. Curabitur rutrum justo quis arcu tempor, eget faucibus sapien facilisis. "
+        )
+                .font("Verdana", 6L).italic().align(JcEnumeration.BOTH);
         pMdp.getJaxbElement().getBody().getContent().add(para4);
     }
 
     private static void createThirdParagraph(final MainDocumentPart pMdp) {
         final GP para3 = GP.create().text("Verdana 16 bold blue center aligned").font("Verdana", 16L).bold()
-            .color(GFactory.color2hex(Color.blue)).align(JcEnumeration.CENTER);
+                .color(GFactory.color2hex(Color.blue)).align(JcEnumeration.CENTER);
         pMdp.getJaxbElement().getBody().getContent().add(para3);
     }
 
     private static void createSecondParagraph(final MainDocumentPart pMdp) {
         final GP para2 = GP.create().text("Tahoma 24 red right aligned").font("Tahoma", 24L).color("FF0000")
-            .align(JcEnumeration.RIGHT);
+                .align(JcEnumeration.RIGHT);
         pMdp.getJaxbElement().getBody().getContent().add(para2);
     }
 
