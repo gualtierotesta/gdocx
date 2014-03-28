@@ -20,8 +20,9 @@ package it.gualtierotesta.gdocx;
 
 import org.docx4j.wml.JcEnumeration;
 import org.docx4j.wml.STHeightRule;
-import org.fest.assertions.Assertions;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Test unit for class GTr
@@ -34,7 +35,7 @@ public class GTrTest {
 
     @Test
     public void testCreate() {
-        Assertions.assertThat(GTr.create()).isNotNull().isInstanceOf(GTr.class);
+        assertThat(GTr.create()).isNotNull().isInstanceOf(GTr.class);
     }
 
     @Test
@@ -43,8 +44,8 @@ public class GTrTest {
         final String exp2 = String.format("<w:t>%s</w:t>", HELLO_WORLD);
         final GTr iut = GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD)));
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTr.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTr.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -53,8 +54,8 @@ public class GTrTest {
         final String exp2 = "<w:trHeight w:val=\"100\" w:hRule=\"exact\"/>";
         final GTr iut = GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))).height(100L);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTr.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTr.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -62,10 +63,10 @@ public class GTrTest {
         final String exp1 = "<w:tr";
         final String exp2 = "<w:trHeight w:val=\"100\" w:hRule=\"auto\"/>";
         final GTr iut =
-            GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))).height(100L, STHeightRule.AUTO);
+                GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))).height(100L, STHeightRule.AUTO);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTr.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTr.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -74,8 +75,8 @@ public class GTrTest {
         final String exp2 = "<w:jc w:val=\"right\"/>";
         final GTr iut = GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))).align(JcEnumeration.RIGHT);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTr.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTr.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -84,7 +85,7 @@ public class GTrTest {
         final String exp2 = "<w:cantSplit/>";
         final GTr iut = GTr.create().add(GTc.create().add(GP.create().text(HELLO_WORLD))).cansplit();
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GTr.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GTr.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 }

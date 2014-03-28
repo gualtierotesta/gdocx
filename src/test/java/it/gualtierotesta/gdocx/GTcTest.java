@@ -22,7 +22,8 @@ import org.docx4j.wml.STBorder;
 import org.docx4j.wml.STVerticalJc;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 /**
  * Test unit for class GTc

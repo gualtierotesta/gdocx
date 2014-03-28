@@ -25,7 +25,8 @@ import org.junit.Test;
 import java.awt.*;
 import java.math.BigInteger;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class GFactoryTest {
 

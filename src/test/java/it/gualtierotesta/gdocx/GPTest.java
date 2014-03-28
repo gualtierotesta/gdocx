@@ -19,8 +19,9 @@
 package it.gualtierotesta.gdocx;
 
 import org.docx4j.wml.JcEnumeration;
-import org.fest.assertions.Assertions;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Test unit for class GP
@@ -33,7 +34,7 @@ public class GPTest {
 
     @Test
     public void testCreate() {
-        Assertions.assertThat(GP.create()).isNotNull().isInstanceOf(GP.class);
+        assertThat(GP.create()).isNotNull().isInstanceOf(GP.class);
     }
 
     @Test
@@ -41,8 +42,8 @@ public class GPTest {
         final String exp = String.format("<w:t>%s</w:t>", HELLO_WORLD);
         final GP iut = GP.create().text(HELLO_WORLD);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GP.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp);
+        assertThat(iut).isNotNull().isInstanceOf(GP.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp);
     }
 
     @Test
@@ -51,8 +52,8 @@ public class GPTest {
         final String exp = String.format("<w:t>%s</w:t>", aStr[1]);
         final GP iut = GP.create().text(aStr);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GP.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp);
+        assertThat(iut).isNotNull().isInstanceOf(GP.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp);
     }
 
     @Test
@@ -63,8 +64,8 @@ public class GPTest {
         final String exp2 = String.format("<w:sz w:val=\"%d\"/>", fontSize * 2L);
         final GP iut = GP.create().text(HELLO_WORLD).font(fontName, fontSize);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GP.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GP.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp1).contains(exp2);
     }
 
     @Test
@@ -73,8 +74,8 @@ public class GPTest {
         final String exp2 = "<w:b/>";
         final GP iut = GP.create().text(HELLO_WORLD).bold();
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GP.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GP.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp).contains(exp2);
     }
 
     @Test
@@ -83,8 +84,8 @@ public class GPTest {
         final String exp2 = "<w:i/>";
         final GP iut = GP.create().text(HELLO_WORLD).italic();
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GP.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GP.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp).contains(exp2);
     }
 
     @Test
@@ -93,8 +94,8 @@ public class GPTest {
         final String exp2 = "<w:color w:val=\"F0F0F0\"/>";
         final GP iut = GP.create().text(HELLO_WORLD).color("F0F0F0");
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GP.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GP.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp).contains(exp2);
     }
 
     @Test
@@ -103,8 +104,8 @@ public class GPTest {
         final String exp2 = " <w:jc w:val=\"center\"/>";
         final GP iut = GP.create().text(HELLO_WORLD).align(JcEnumeration.CENTER);
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GP.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().contains(exp).contains(exp2);
+        assertThat(iut).isNotNull().isInstanceOf(GP.class);
+        assertThat(iut.xml()).isNotEmpty().contains(exp).contains(exp2);
     }
 
     @Test
@@ -112,7 +113,7 @@ public class GPTest {
         final GP iut = GP.create().text(HELLO_WORLD);
         final String exp = "<?xml version=\"1.0\"";
 
-        Assertions.assertThat(iut).isNotNull().isInstanceOf(GP.class);
-        Assertions.assertThat(iut.xml()).isNotEmpty().startsWith(exp);
+        assertThat(iut).isNotNull().isInstanceOf(GP.class);
+        assertThat(iut.xml()).isNotEmpty().startsWith(exp);
     }
 }
