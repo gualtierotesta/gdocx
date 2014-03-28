@@ -144,9 +144,9 @@ public class GTbl extends Tbl {
 
         Validate.notEmpty(sLookValue, "Look value not valid");
 
-        final CTShortHexNumber ctShortHexNumber = FACTORY.createCTShortHexNumber();
-        ctShortHexNumber.setVal(sLookValue);
-        tblPr.setTblLook(ctShortHexNumber);
+        final CTTblLook ctTblLook = FACTORY.createCTTblLook();
+        ctTblLook.setVal(sLookValue);
+        tblPr.setTblLook(ctTblLook);
         return this;
     }
 
@@ -181,7 +181,7 @@ public class GTbl extends Tbl {
      * @return same GTbl instance
      */
     public GTbl borderTop(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
-        final Long lSpace) {
+                          final Long lSpace) {
         getTblBorders().setTop(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
@@ -195,7 +195,7 @@ public class GTbl extends Tbl {
      * @return same GTbl instance
      */
     public GTbl borderBottom(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
-        final Long lSpace) {
+                             final Long lSpace) {
         getTblBorders().setBottom(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
