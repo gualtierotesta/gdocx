@@ -15,16 +15,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package it.gualtierotesta.gdocx;
 
+import java.math.BigInteger;
+import javax.annotation.Nonnull;
 import org.apache.commons.lang.Validate;
 import org.docx4j.XmlUtils;
 import org.docx4j.jaxb.Context;
-import org.docx4j.wml.*;
-
-import javax.annotation.Nonnull;
-import java.math.BigInteger;
+import org.docx4j.wml.CTBorder;
+import org.docx4j.wml.CTTblLayoutType;
+import org.docx4j.wml.CTTblLook;
+import org.docx4j.wml.Jc;
+import org.docx4j.wml.JcEnumeration;
+import org.docx4j.wml.ObjectFactory;
+import org.docx4j.wml.STBorder;
+import org.docx4j.wml.STTblLayoutType;
+import org.docx4j.wml.Tbl;
+import org.docx4j.wml.TblBorders;
+import org.docx4j.wml.TblGridCol;
+import org.docx4j.wml.TblWidth;
 
 /**
  * GDocx extension to object Tbl
@@ -71,7 +80,7 @@ public class GTbl extends Tbl {
     /**
      * Set horizontal alignment
      *
-     * @param eAlign alignment type  (for ex. JcEnumeration.CENTER )
+     * @param eAlign alignment type (for ex. JcEnumeration.CENTER )
      * @return same GTr instance
      */
     @Nonnull
@@ -88,9 +97,10 @@ public class GTbl extends Tbl {
     /**
      * Set the preferred width of the table
      *
-     * @param lWidth the value of the preferred width of the table. If omitted, the value is assumed to be zero.
-     * @param sType  type (unit) of the value
-     *               Possible values are: auto, dxa, nil, pict
+     * @param lWidth the value of the preferred width of the table. If omitted,
+     * the value is assumed to be zero.
+     * @param sType type (unit) of the value Possible values are: auto, dxa,
+     * nil, pict
      * @return same GTbl instance
      */
     @Nonnull
@@ -175,13 +185,14 @@ public class GTbl extends Tbl {
     /**
      * Create top border
      *
-     * @param lSize       size of the border
+     * @param lSize size of the border
      * @param eBorderLine type of the border line (enum)
-     * @param sColor      color of the border line. can be null if no border line
+     * @param sColor color of the border line. can be null if no border line
+     * @param lSpace space value
      * @return same GTbl instance
      */
     public GTbl borderTop(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
-                          final Long lSpace) {
+            final Long lSpace) {
         getTblBorders().setTop(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
@@ -189,13 +200,14 @@ public class GTbl extends Tbl {
     /**
      * Create bottom border
      *
-     * @param lSize       size of the border
+     * @param lSize size of the border
      * @param eBorderLine type of the border line (enum)
-     * @param sColor      color of the border line. can be null if no border line
+     * @param sColor color of the border line. can be null if no border line
+     * @param lSpace space value
      * @return same GTbl instance
      */
     public GTbl borderBottom(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
-                             final Long lSpace) {
+            final Long lSpace) {
         getTblBorders().setBottom(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
@@ -203,9 +215,10 @@ public class GTbl extends Tbl {
     /**
      * Create all borders
      *
-     * @param lSize       size of the border
+     * @param lSize size of the border
      * @param eBorderLine type of the border line (enum)
-     * @param sColor      color of the border line. can be null if no border line
+     * @param sColor color of the border line. can be null if no border line
+     * @param lSpace space value
      * @return same GTbl instance
      */
     public GTbl borders(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor, final Long lSpace) {

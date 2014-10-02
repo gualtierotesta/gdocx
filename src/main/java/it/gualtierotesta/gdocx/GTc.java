@@ -15,17 +15,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package it.gualtierotesta.gdocx;
 
+import java.math.BigInteger;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import org.apache.commons.lang.Validate;
 import org.docx4j.XmlUtils;
 import org.docx4j.jaxb.Context;
-import org.docx4j.wml.*;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import java.math.BigInteger;
+import org.docx4j.wml.CTShd;
+import org.docx4j.wml.CTVerticalJc;
+import org.docx4j.wml.ObjectFactory;
+import org.docx4j.wml.STBorder;
+import org.docx4j.wml.STShd;
+import org.docx4j.wml.STVerticalJc;
+import org.docx4j.wml.TblWidth;
+import org.docx4j.wml.Tc;
+import org.docx4j.wml.TcPrInner;
 
 /**
  * GDocx extension to object Tc
@@ -90,7 +96,7 @@ public class GTc extends Tc {
      * Set shading cell info
      *
      * @param sColor cell color
-     * @param sFill  cell fill color
+     * @param sFill cell fill color
      * @return same GTc instance
      */
     @Nonnull
@@ -110,7 +116,8 @@ public class GTc extends Tc {
     /**
      * Set cell vertical alignment
      *
-     * @param eVertAlign enum with vertical alignment requirement (for ex. STVerticalJc.CENTER )
+     * @param eVertAlign enum with vertical alignment requirement (for ex.
+     * STVerticalJc.CENTER )
      * @return same GTc instance
      */
     @Nonnull
@@ -127,8 +134,8 @@ public class GTc extends Tc {
     /**
      * Set cell width
      *
-     * @param lWidth width value (> 0)
-     * @param sType  type (unit) of the value (for ex. "dxa")
+     * @param lWidth width value (should be greater than 0)
+     * @param sType type (unit) of the value (for ex. "dxa")
      * @return same GTc instance
      */
     @Nonnull
@@ -147,13 +154,14 @@ public class GTc extends Tc {
     /**
      * Create top border
      *
-     * @param lSize       size of the border
+     * @param lSize size of the border
      * @param eBorderLine type of the border line (enum)
-     * @param sColor      color of the border line. can be null if no border line
+     * @param sColor color of the border line. can be null if no border line
+     * @param lSpace space value
      * @return same GTc instance
      */
     public GTc borderTop(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
-        final Long lSpace) {
+            final Long lSpace) {
         getTcBorders().setTop(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
@@ -161,13 +169,14 @@ public class GTc extends Tc {
     /**
      * Create bottom border
      *
-     * @param lSize       size of the border
+     * @param lSize size of the border
      * @param eBorderLine type of the border line (enum)
-     * @param sColor      color of the border line. can be null if no border line
+     * @param sColor color of the border line. can be null if no border line
+     * @param lSpace space value
      * @return same GTc instance
      */
     public GTc borderBottom(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
-        final Long lSpace) {
+            final Long lSpace) {
         getTcBorders().setBottom(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
@@ -175,13 +184,14 @@ public class GTc extends Tc {
     /**
      * Create left border
      *
-     * @param lSize       size of the border
+     * @param lSize size of the border
      * @param eBorderLine type of the border line (enum)
-     * @param sColor      color of the border line. can be null if no border line
+     * @param sColor color of the border line. can be null if no border line
+     * @param lSpace space value
      * @return same GTc instance
      */
     public GTc borderLeft(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
-        final Long lSpace) {
+            final Long lSpace) {
         getTcBorders().setLeft(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
@@ -189,13 +199,14 @@ public class GTc extends Tc {
     /**
      * Create right border
      *
-     * @param lSize       size of the border
+     * @param lSize size of the border
      * @param eBorderLine type of the border line (enum)
-     * @param sColor      color of the border line. can be null if no border line
+     * @param sColor color of the border line. can be null if no border line
+     * @param lSpace space value
      * @return same GTc instance
      */
     public GTc borderRight(final long lSize, @Nonnull final STBorder eBorderLine, final String sColor,
-        final Long lSpace) {
+            final Long lSpace) {
         getTcBorders().setRight(GFactory.buildBorder(lSize, eBorderLine, sColor, lSpace));
         return this;
     }
@@ -231,6 +242,5 @@ public class GTc extends Tc {
         }
         return tcPr.getTcBorders();
     }
-
 
 }
