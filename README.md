@@ -1,5 +1,7 @@
 # gdocx
 
+THIS PROJECT HAS BEEN ARCHIVED
+
 Fluent like extension to Plutext's docx4j library. 
 
 GDOCX is a Java project which implements a fluent like extension to the docx4j library, 
